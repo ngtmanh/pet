@@ -1,0 +1,97 @@
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://classRoomDetailView.title"
+      focusComponent="form">
+    <data>
+        <instance id="classRoomDc" class="com.company.pet.entity.ClassRoom">
+            <fetchPlan extends="_base">
+                <property name="teacher" fetchPlan="_base"/>
+                <property name="school" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="classRoomDl"/>
+        </instance>
+
+        <collection id="studentsDc" class="com.company.pet.entity.User">
+            <loader id="studentsDl">
+                <query>
+                    <![CDATA[
+                    select s from User s
+                    ]]>
+                </query>
+            </loader>
+        </collection>
+
+        <collection id="usersDc" class="com.company.pet.entity.User">
+            <loader id="usersDl">
+                <query>
+                    <![CDATA[
+                    select u from User u
+                    ]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+
+    <actions>
+        <action id="addStudent" type="list_create" />
+        <action id="removeStudent" type="list_remove" />
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+
+    <layout>
+        <formLayout id="form" dataContainer="classRoomDc">
+            <responsiveSteps>
+                <responsiveStep minWidth="0" columns="1"/>
+                <responsiveStep minWidth="40em" columns="2"/>
+            </responsiveSteps>
+
+            <textField id="nameField" property="name"/>
+
+            <entityPicker id="teacherField" property="teacher">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+        </formLayout>
+
+        <vbox spacing="true">
+            <h3>Students</h3>
+            <dataGrid id="studentsDataGrid" dataContainer="studentsDc" width="100%">
+                <columns>
+                    <column property="firstName"/>
+                    <column property="lastName"/>
+                    <column property="address"/>
+                    <column property="email"/>
+                    <column property="phone"/>
+                </columns>
+                <actions>
+                    <action id="addStudent" type="list_create"/>
+                    <action id="removeStudent" type="list_remove"/>
+                </actions>
+            </dataGrid>
+
+            <entityPicker id="usersPicker" metaClass="User" visible="false">
+                <actions>
+                    <action id="entityClear" type="entity_clear"/>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityOpen" type="entity_open"/>
+                </actions>
+            </entityPicker>
+
+            <hbox spacing="true" classNames="buttons-panel">
+                <button id="addStudentButton" action="addStudent"/>
+                <button id="removeStudentButton" action="removeStudent" />
+            </hbox>
+        </vbox>
+
+        <hbox id="detailActions" spacing="true" classNames="buttons-panel">
+            <button id="saveAndCloseButton" action="saveAction"/>
+            <button id="closeButton" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>

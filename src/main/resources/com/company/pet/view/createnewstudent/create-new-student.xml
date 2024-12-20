@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://createNewStudent.title">
+    <actions>
+        <action id="createNewStudent" text="Save"/>
+        <action id="closeAction" type="view_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form">
+            <textField id="usernameField" label="Username" required="true"/>
+            <passwordField id="passwordField"
+                           label="msg://com.company.pet.entity/User.password"
+                           required="true"/>
+            <passwordField id="confirmPasswordField"
+                           label="Confirm Password"
+                           required="true"/>
+            <textField id="firstNameField" label="First Name" required="true"/>
+            <textField id="lastNameField" label="Last Name" required="true"/>
+            <textField id="emailField" label="Email" required="true"/>
+            <textField id="addressField" label="Address" required="true"/>
+            <textField id="phoneField" label="Phone" required="true"/>
+            <comboBox id="timeZoneField" label="Time Zone" clearButtonVisible="true"/>
+            <checkbox id="activeField" label="Active" />
+        </formLayout>
+
+        <hbox id="hbox" width="100%" >
+            <textField id="scoreMath" label="Math" width="200px"/>
+            <textField id="scoreEnglish" label="English" width="200px"/>
+            <textField id="scoreHistory" label="History" width="200px"/>
+        </hbox>
+
+        <hbox id="actionsPanel">
+            <button id="savePoint" action="createNewStudent"/>
+            <button id="cancelButton" text="Cancel" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>

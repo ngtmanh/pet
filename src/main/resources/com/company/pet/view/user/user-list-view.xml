@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://UserListView.title"
+      focusComponent="usersDataGrid">
+    <data>
+        <collection id="usersDc"
+                    class="com.company.pet.entity.User">
+            <fetchPlan extends="_base"/>
+            <loader id="usersDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from User e join Score s on e.score.id = s.id order by e.username]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <actions>
+        <action id="selectAction" type="lookup_select"/>
+        <action id="discardAction" type="lookup_discard"/>
+        <action id="filterByRole" text="Role"/>
+        <action id="filterByUserName" text="UserName"/>
+        <action id="filterByFirstName" text="FirstName"/>
+        <action id="filterByLastName" text="LastName"/>
+        <action id="filterByEmail" text="Email"/>
+        <action id="createNewStudent" text="Create"/>
+    </actions>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <urlQueryParameters>
+            <genericFilter component="genericFilter"/>
+            <pagination component="pagination"/>
+        </urlQueryParameters>
+    </facets>
+    <layout>
+        <genericFilter id="genericFilter"
+                       dataLoader="usersDl">
+            <properties include=".*"/>
+
+        </genericFilter>
+        <hbox>
+            <dropdownButton id="searchMenu" text="SearchBy..." icon="SEARCH">
+                <items>
+                    <actionItem id="filterByRole" ref="filterByRole"/>
+                    <actionItem id="filterByUserName" ref="filterByUserName"/>
+                    <actionItem id="filterByFirstName" ref="filterByFirstName"/>
+                    <actionItem id="filterByLastName" ref="filterByLastName"/>
+                    <actionItem id="filterByEmail" ref="filterByEmail"/>
+                </items>
+            </dropdownButton>
+
+            <propertyFilter id="filterByRole" property="role" operation="EQUAL" dataLoader="usersDl" visible="false"/>
+            <propertyFilter id="filterByUserName" property="username" operation="CONTAINS" dataLoader="usersDl"
+                            visible="false"/>
+            <propertyFilter id="filterByFirstName" property="firstName" operation="CONTAINS" dataLoader="usersDl"
+                            visible="false"/>
+            <propertyFilter id="filterByLastName" property="lastName" operation="CONTAINS" dataLoader="usersDl"
+                            visible="false"/>
+            <propertyFilter id="filterByEmail" property="email" operation="CONTAINS" dataLoader="usersDl"
+                            visible="false"/>
+        </hbox>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button id="createButton" action="createNewStudent"/>
+            <button id="editButton" action="usersDataGrid.edit"/>
+            <button id="removeButton" action="usersDataGrid.remove"/>
+            <button id="showRoleAssignmentsButton" action="usersDataGrid.showRoleAssignments"/>
+            <dropdownButton id="additionalButton" text="msg://additionalMenu" icon="COG">
+                <items>
+                    <actionItem id="changePasswordItem" ref="usersDataGrid.changePassword"/>
+                    <actionItem id="resetPasswordItem" ref="usersDataGrid.resetPassword"/>
+                    <actionItem id="showUserSubstitutionsItem" ref="usersDataGrid.showUserSubstitutions"/>
+                </items>
+            </dropdownButton>
+            <button id="filterByTeacher" text="Teacher"/>
+            <simplePagination id="pagination" dataLoader="usersDl"/>
+        </hbox>
+        <dataGrid id="usersDataGrid"
+                  width="100%"
+                  columnReorderingAllowed="true"
+                  minHeight="20em"
+                  dataContainer="usersDc">
+            <actions>
+                <action id="create" type="list_create"/>
+                <action id="edit" type="list_edit"/>
+                <action id="remove" type="list_remove"/>
+                <action id="showRoleAssignments" type="sec_showRoleAssignments"/>
+                <action id="changePassword" type="sec_changePassword"/>
+                <action id="resetPassword" type="sec_resetPassword"/>
+                <action id="showUserSubstitutions" type="sec_showUserSubstitutions"/>
+            </actions>
+            <columns resizable="true">
+                <column property="username"/>
+                <column property="firstName"/>
+                <column property="lastName"/>
+                <column property="email"/>
+                <column property="score.math"/>
+                <column property="score.history"/>
+                <column property="score.english"/>
+                <column property="active"/>
+            </columns>
+        </dataGrid>
+        <hbox id="lookupActions" visible="false">
+            <button id="selectButton" action="selectAction"/>
+            <button id="discardButton" action="discardAction"/>
+        </hbox>
+    </layout>
+</view>

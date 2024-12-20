@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      xmlns:c="http://jmix.io/schema/flowui/jpql-condition"
+      title="msg://scoreListView.title"
+      focusComponent="scoresDataGrid">
+    <data>
+        <collection id="scoresDc"
+                    class="com.company.pet.entity.Score">
+            <fetchPlan extends="_base"/>
+            <loader id="scoresDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Score e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <urlQueryParameters>
+            <genericFilter component="genericFilter"/>
+            <pagination component="pagination"/>
+        </urlQueryParameters>
+    </facets>
+    <actions>
+        <action id="selectAction" type="lookup_select"/>
+        <action id="discardAction" type="lookup_discard"/>
+    </actions>
+    <layout>
+        <genericFilter id="genericFilter"
+                       dataLoader="scoresDl">
+            <properties include=".*"/>
+        </genericFilter>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button id="createButton" action="scoresDataGrid.create"/>
+            <button id="editButton" action="scoresDataGrid.edit"/>
+            <button id="removeButton" action="scoresDataGrid.remove"/>
+            <simplePagination id="pagination" dataLoader="scoresDl"/>
+        </hbox>
+        <dataGrid id="scoresDataGrid"
+                  width="100%"
+                  minHeight="20em"
+                  dataContainer="scoresDc"
+                  columnReorderingAllowed="true">
+            <actions>
+                <action id="create" type="list_create"/>
+                <action id="edit" type="list_edit"/>
+                <action id="remove" type="list_remove"/>
+            </actions>
+            <columns resizable="true">
+                <column property="math"/>
+                <column property="english"/>
+                <column property="history"/>
+            </columns>
+        </dataGrid>
+        <hbox id="lookupActions" visible="false">
+            <button id="selectButton" action="selectAction"/>
+            <button id="discardButton" action="discardAction"/>
+        </hbox>
+    </layout>
+</view>
