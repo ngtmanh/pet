@@ -58,7 +58,6 @@
                 </actions>
             </entityPicker>
         </formLayout>
-
         <vbox spacing="true">
             <h3>Students</h3>
             <dataGrid id="studentsDataGrid" dataContainer="studentsDc" width="100%">
