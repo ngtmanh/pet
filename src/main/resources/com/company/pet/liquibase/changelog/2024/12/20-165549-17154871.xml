@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="pet">
+        <addColumn tableName="SCORE">
+            <column name="NAME" type="VARCHAR(255)"/>
+            <column name="POINT" type="FLOAT"/>
+            <column name="USER_ID" type="UUID"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="2" author="pet">
+        <addForeignKeyConstraint baseColumnNames="USER_ID" baseTableName="SCORE" constraintName="FK_SCORE_ON_USER"
+                                 referencedColumnNames="ID" referencedTableName="USER_"/>
+    </changeSet>
+    <changeSet id="3" author="pet">
+        <dropColumn columnName="ENGLISH" tableName="SCORE"/>
+
+        <dropColumn columnName="HISTORY" tableName="SCORE"/>
+
+        <dropColumn columnName="MATH" tableName="SCORE"/>
+    </changeSet>
+    <changeSet id="4" author="pet">
+        <dropColumn columnName="SCORE" tableName="USER_"/>
+    </changeSet>
+</databaseChangeLog>

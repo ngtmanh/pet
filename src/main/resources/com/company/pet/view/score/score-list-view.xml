@@ -5,11 +5,11 @@
       focusComponent="scoresDataGrid">
     <data>
         <collection id="scoresDc"
-                    class="com.company.pet.entity.Score">
+                    class="com.company.pet.entity.Course">
             <fetchPlan extends="_base"/>
             <loader id="scoresDl" readOnly="true">
                 <query>
-                    <![CDATA[select e from Score e]]>
+                    <![CDATA[select e from Course e]]>
                 </query>
             </loader>
         </collection>

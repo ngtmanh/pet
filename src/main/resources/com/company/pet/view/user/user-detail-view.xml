@@ -8,10 +8,28 @@
             <fetchPlan extends="_base"/>
             <loader/>
         </instance>
+        <instance id="selectedCourseDc"
+                  class="com.company.pet.entity.Course">
+            <fetchPlan extends="_base"/>
+            <loader/>
+        </instance>
+
+        <collection id="courseDc"
+                    class="com.company.pet.entity.Course">
+            <fetchPlan extends="_base">
+                <property name="user" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="courseDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Course e where e.user.id = :id]]>
+                </query>
+            </loader>
+        </collection>
     </data>
     <actions>
         <action id="saveAction" type="detail_saveClose"/>
         <action id="closeAction" type="detail_close"/>
+        <action id="createCourse" text="Create"/>
     </actions>
     <facets>
         <dataLoadCoordinator auto="true"/>
@@ -33,6 +51,13 @@
             <comboBox id="timeZoneField" property="timeZoneId" clearButtonVisible="true"/>
             <checkbox id="activeField" property="active"/>
         </formLayout>
+        <button id="createCourse" action="createCourse"/>
+        <dataGrid id="course" dataContainer="courseDc" width="100%">
+            <columns>
+                <column property="name"/>
+                <column property="point"/>
+            </columns>
+        </dataGrid>
         <hbox id="detailActions">
             <button id="saveAndCloseButton" action="saveAction"/>
             <button id="closeButton" action="closeAction"/>

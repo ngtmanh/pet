@@ -3,6 +3,7 @@ package com.company.pet.entity;
 import io.jmix.core.annotation.DeletedBy;
 import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
+import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedBy;
@@ -16,17 +17,16 @@ import java.util.UUID;
 @JmixEntity
 @Table(name = "SCORE")
 @Entity
-public class Score {
+public class Course {
     @JmixGeneratedValue
     @Column(name = "ID", nullable = false)
     @Id
-    private UUID id=UUID.randomUUID();
-    @Column(name = "MATH")
-    private Float math;
-    @Column(name = "ENGLISH")
-    private Float english;
-    @Column(name = "HISTORY")
-    private Float history;
+    private UUID id = UUID.randomUUID();
+    @InstanceName
+    @Column(name = "NAME")
+    private String name;
+    @Column(name = "POINT")
+    private Float point;
     @Column(name = "VERSION", nullable = false)
     @Version
     private Integer version;
@@ -48,36 +48,31 @@ public class Score {
     @DeletedDate
     @Column(name = "DELETED_DATE")
     private OffsetDateTime deletedDate;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
+    private User user;
 
-    public Score() {}
-    public Score(Float math, Float english, Float history) {
-        this.math = math;
-        this.english = english;
-        this.history = history;
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Float getHistory() {
-        return history;
+    public Float getPoint() {
+        return point;
     }
 
-    public void setHistory(Float history) {
-        this.history = history;
+    public void setPoint(Float point) {
+        this.point = point;
     }
 
-    public Float getEnglish() {
-        return english;
+    public String getName() {
+        return name;
     }
 
-    public void setEnglish(Float english) {
-        this.english = english;
-    }
-
-    public Float getMath() {
-        return math;
-    }
-
-    public void setMath(Float math) {
-        this.math = math;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public OffsetDateTime getDeletedDate() {

@@ -8,7 +8,7 @@
             <fetchPlan extends="_base"/>
             <loader id="usersDl" readOnly="true">
                 <query>
-                    <![CDATA[select e from User e join Score s on e.score.id = s.id order by e.username]]>
+                    <![CDATA[select e from User e order by e.username]]>
                 </query>
             </loader>
         </collection>
@@ -91,9 +91,6 @@
                 <column property="firstName"/>
                 <column property="lastName"/>
                 <column property="email"/>
-                <column property="score.math"/>
-                <column property="score.history"/>
-                <column property="score.english"/>
                 <column property="active"/>
             </columns>
         </dataGrid>

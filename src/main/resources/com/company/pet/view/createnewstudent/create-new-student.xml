@@ -23,12 +23,6 @@
             <checkbox id="activeField" label="Active" />
         </formLayout>
 
-        <hbox id="hbox" width="100%" >
-            <textField id="scoreMath" label="Math" width="200px"/>
-            <textField id="scoreEnglish" label="English" width="200px"/>
-            <textField id="scoreHistory" label="History" width="200px"/>
-        </hbox>
-
         <hbox id="actionsPanel">
             <button id="savePoint" action="createNewStudent"/>
             <button id="cancelButton" text="Cancel" action="closeAction"/>

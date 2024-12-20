@@ -4,7 +4,7 @@
       focusComponent="form">
     <data>
         <instance id="scoreDc"
-                  class="com.company.pet.entity.Score">
+                  class="com.company.pet.entity.Course">
             <fetchPlan extends="_base"/>
             <loader id="scoreDl"/>
         </instance>

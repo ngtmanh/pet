@@ -1,6 +1,6 @@
 package com.company.pet.view.createnewstudent;
 
-import com.company.pet.entity.Score;
+import com.company.pet.entity.Course;
 import com.company.pet.entity.User;
 import com.company.pet.service.StudentService;
 import com.company.pet.view.main.MainView;
@@ -64,12 +64,6 @@ public class CreateNewStudent extends StandardView {
             String email = emailField.getValue();
             String address = addressField.getValue();
             String phone = phoneField.getValue();
-
-
-            Score score = new Score(mathScore, englishScore, historyScore);
-
-            User user = new User(username, password, firstName, lastName, email, address, phone, score);
-            studentService.createStudent(user, score);
 
             UI.getCurrent().navigate("users");
             Notification.show("Student created successfully!", 5000, Notification.Position.TOP_CENTER);

@@ -1,6 +1,6 @@
 package com.company.pet.service;
 
-import com.company.pet.entity.Score;
+import com.company.pet.entity.Course;
 import com.company.pet.entity.User;
 import java.util.List;
 import java.util.UUID;
@@ -12,5 +12,5 @@ public interface StudentService {
 
     List<User> findUserByRole(String role);
 
-    void createStudent(User user, Score score);
+    void createStudent(User user, Course score);
 }

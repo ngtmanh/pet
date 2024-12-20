@@ -63,31 +63,10 @@ public class User implements JmixUserDetails, HasTimeZone {
     @Column(name = "ROLE")
     private String role;
 
-    @OneToOne
-    @JoinColumn(name = "SCORE", referencedColumnName = "ID")
-    private Score score;
-
     public User() {
-    }
-    public User(String username, String password,String firstName,String lastName,String email, String address, String phone, Score score) {
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.score = score;
-        this.address = address;
-        this.phone = phone;
     }
     @Transient
     private Collection<? extends GrantedAuthority> authorities;
-
-    public Score getScore() {
-        return score;
-    }
-    public void setScore(Score score) {
-        this.score = score;
-    }
 
     public String getRole() {
         return role;

@@ -1,6 +1,6 @@
 package com.company.pet.view.score;
 
-import com.company.pet.entity.Score;
+import com.company.pet.entity.Course;
 import com.company.pet.view.main.MainView;
 import com.vaadin.flow.router.Route;
 import io.jmix.flowui.view.EditedEntityContainer;
@@ -12,5 +12,5 @@ import io.jmix.flowui.view.ViewDescriptor;
 @ViewController(id = "Score.detail")
 @ViewDescriptor(path = "score-detail-view.xml")
 @EditedEntityContainer("scoreDc")
-public class ScoreDetailView extends StandardDetailView<Score> {
+public class ScoreDetailView extends StandardDetailView<Course> {
 }
